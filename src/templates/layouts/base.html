@@ -1,0 +1,26 @@
+{# src/views/layouts/base.njk #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "Task Manager" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:2rem;line-height:1.4}
+    header nav a{margin-right:1rem}
+    form.inline{display:inline}
+    label{display:block;margin:.5rem 0}
+    input, textarea, select{width:100%;max-width:420px;padding:.5rem}
+    .error{color:#b00020}
+  </style>
+  <link rel="stylesheet" href="/bootstrap5/css/bootstrap.min.css">
+</head>
+<body>
+  {% include "layouts/navbar.html" %}
+  <main class="container my-4">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "layouts/footer.html" %}
+  <script src="/bootstrap5/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

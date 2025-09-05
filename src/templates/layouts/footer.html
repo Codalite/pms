@@ -1,0 +1,45 @@
+
+<style>
+    footer,header {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+<footer class="bg-dark text-light mt-5">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <h5 class="fw-bold">ProjectManager</h5>
+        <p class="text-light small">
+          Built for clarity, collaboration, and control. Empowering teams to manage projects with ease.
+        </p>
+      </div>
+      <div class="col-md-3 mb-3 mb-md-0">
+        <h6 class="text-uppercase">Links</h6>
+        <ul class="list-unstyled">
+          <li><a href="/projects" class="text-light text-decoration-none">Projects</a></li>
+          <li><a href="/auth/login" class="text-light text-decoration-none">Login</a></li>
+          <li><a href="/auth/register" class="text-light text-decoration-none">Register</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-uppercase">Contact</h6>
+        <p class="small mb-1">Buea, Cameroon</p>
+        <p class="small mb-0">Email: support@projectmanager.local</p>
+      </div>
+    </div>
+    <hr class="border-light mt-4">
+    <div class="text-center small text-light py-3">
+  &copy; <span id="year"></span> ProjectManager. All rights reserved.
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+  </div>
+</footer>

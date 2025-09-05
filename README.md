@@ -4,6 +4,74 @@ A Node.js-based project management system designed to streamline project and tas
 
 ---
 
+## Badges
+
+![Node.js CI](https://img.shields.io/github/workflow/status/Codalite/pms/Node.js%20CI?style=flat-square)
+![License](https://img.shields.io/github/license/Codalite/pms?style=flat-square)
+![Issues](https://img.shields.io/github/issues/Codalite/pms?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/Codalite/pms?style=flat-square)
+
+---
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+    A[Browser / Mobile Client] -->|HTTP/HTTPS| B(Express.js Server)
+    B -->|Session/JWT| C[Authentication Middleware]
+    B --> D[Controllers]
+    D --> E[Models (Mongoose)]
+    E --> F[(MongoDB)]
+    B --> G[Nunjucks Templates]
+```
+*Diagram: The project uses Express.js for routing, Nunjucks for server-side views, JWT/Session for authentication, and Mongoose for MongoDB interactions.*
+
+---
+
+## Sample API Requests
+
+**Authentication (Login)**
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "your_password"
+}
+```
+
+**Create Project**
+```http
+POST /api/projects
+Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
+{
+  "name": "New Project",
+  "description": "Project description"
+}
+```
+
+**Get Tasks for a Project**
+```http
+GET /api/projects/{projectId}/tasks
+Authorization: Bearer <JWT_TOKEN>
+```
+
+**Assign Task to User**
+```http
+POST /api/tasks/{taskId}/assign
+Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
+{
+  "userId": "memberUserId"
+}
+```
+
+---
+
 ## Features
 
 - **Project & Task Management:** Create, read, update, and delete projects and tasks.
@@ -113,5 +181,3 @@ A Node.js-based project management system designed to streamline project and tas
 For API documentation, advanced configuration, or troubleshooting, see the [Wiki](https://github.com/Codalite/pms/wiki).
 
 ---
-
-If you wish to add badges (build status, license, etc.), a visual architecture diagram, or sample API requests, let me know and I can update this README further!

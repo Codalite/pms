@@ -1,24 +1,34 @@
 {
-  "name": "pms",
-  "version": "0.0.0",
+  "name": "Task-Manager",
+  "version": "0.0.1",
+  "main": "src/app.js",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "node --watch --env-file=.env ./bin/www "
+    "seed": "node ./src/seed.js",
+    "start": "node ./src/app.js",
+    "dev": "node --watch --env-file=.env ./src/app.js ",
+    "lint": "echo \"Add ESLint if you want\""
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "chokidar": "^3.6.0",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "debug": "^4.4.1",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "morgan": "^1.10.1",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "nunjucks-date-filter": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19"
   }
 }

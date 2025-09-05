@@ -1,0 +1,94 @@
+{# src/views/projects/show.html #}
+
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="container py-4">
+  <h1 class="mb-3">{{ project.name }}</h1>
+  <p class="lead">{{ project.description }}</p>
+
+  <h2 class="mt-5">Tasks</h2>
+  {% if tasks.length %}
+    <ul class="list-group mb-4">
+      {% for t in tasks %}
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ t.title }}</strong>
+              <span class="text-muted">— {{ t.status }} — due {{ t.dueDate | date('YYYY-MM-DD') if t.dueDate else 'none' }}</span>
+            </div>
+            <div class="d-flex gap-2">
+              <form action="/tasks/{{ t._id }}/status" method="post" class="d-flex align-items-center">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <select name="status" class="form-select form-select-sm me-2">
+                  <option value="todo" {% if t.status == 'todo' %}selected{% endif %}>To do</option>
+                  <option value="in_progress" {% if t.status == 'in_progress' %}selected{% endif %}>In progress</option>
+                  <option value="done" {% if t.status == 'done' %}selected{% endif %}>Done</option>
+                </select>
+                <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+              </form>
+              <form action="/tasks/{{ t._id }}/delete" method="post">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info">No tasks yet.</div>
+  {% endif %}
+
+  <h3 class="mt-5">New Task</h3>
+  <form action="/tasks" method="post" class="mb-5">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+    <input type="hidden" name="project" value="{{ project._id }}">
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
+      <input type="date" class="form-control" id="dueDate" name="dueDate">
+    </div>
+
+    <div class="mb-3">
+      <label for="priority" class="form-label">Priority</label>
+      <select class="form-select" id="priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+
+  <h3>Add Member</h3>
+  <form method="post" action="/projects/{{ project._id }}/members">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    <div class="mb-3">
+      <label for="email" class="form-label">User Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="role" class="form-label">Role</label>
+      <select class="form-select" id="role" name="role">
+        <option value="member">Member</option>
+        <option value="manager">Manager</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+{% endblock %}

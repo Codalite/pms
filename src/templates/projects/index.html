@@ -1,0 +1,29 @@
+{# src/views/projects/index.html #}
+
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Projects</h1>
+    <a href="/projects/new" class="btn btn-success">+ New Project</a>
+  </div>
+
+  {% if projects.length %}
+    <div class="list-group">
+      {% for p in projects %}
+        <a 
+          href="/projects/{{ p._id }}" 
+          class="list-group-item list-group-item-action"
+        >
+          {{ p.name }}
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      No projects yet. Start by creating one!
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
